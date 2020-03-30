@@ -15,6 +15,13 @@ window.onclick = function(event) {
   }
 }
 }
+function validate() {
+         if( document.myForm.name.value == "" ) {
+            alert( "Please provide your Email!" );
+            document.myForm.email.focus() ;
+            return false;
+         }
+       }
 </script>
 </div>
   </head>
@@ -25,8 +32,8 @@ window.onclick = function(event) {
     <div id="id01" class="modal">
       <form class="modal-content animate" action"<?php echo $_SERVER['PHP_SELF']?>" method="post">
         <div class="container">
-          <label for="uname"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username(EMAIL)" name="uname" required>
+          <label for="email"><b>EMAIL</b></label>
+          <input type="text" placeholder="Enter Username(EMAIL)" name="email" required>
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required>
           <button type="submit">Login</button>
@@ -50,10 +57,10 @@ window.onclick = function(event) {
         $client = new MongoDB\Client("mongodb://127.0.0.1:27017");
         $db = $client -> escabot;
         $userdata = $db -> userdata;
-        if(isset($_POST['uname'])&&isset($_POST['psw'])){
-          $uname = $_POST['uname'];
+        if(isset($_POST['email'])&&isset($_POST['psw'])){
+          $email = $_POST['email'];
           $pass = md5($_POST['psw']);
-          $query = array('email' => $uname, 'password' => $pass);
+          $query = array('email' => $email, 'password' => $pass);
           if($userdata->count($query) >= 1){
             $document = $userdata -> findOne($query);
             $fname = $document['name']['firstname'];
@@ -72,9 +79,6 @@ window.onclick = function(event) {
           else{
             echo "<br><h3>WRONG EMAIL OR PASS</h3>";
           }
-        }
-        elseif(isset($_COOKIE['fname']) && isset($_COOKIE['nick']) && isset($_COOKIE['email'])){
-                  header("Location: hello.php");
         }
       ?>
   </body>

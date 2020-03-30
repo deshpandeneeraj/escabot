@@ -3,15 +3,15 @@
   <head>
     <script>
       function validateForm() {
-
           if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.myForm.email.value))
             {
               return (true)
             }
+            else{
               alert("You have entered an invalid email address!")
               return (false)
+            }
         }
-
     </script>
     <h1>REGISTER WITH ESCABOT</h1>
     <title>EscaBot Register</title>
