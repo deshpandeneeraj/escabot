@@ -21,8 +21,10 @@ bot = cb.ChatBot(
     ],
     database_uri='mongodb://localhost:27017/escabot'
 )
-#trainer = ListTrainer(bot)
 #storage_adapter="chatterbot.storage.MongoDatabaseAdapter"
+#trainer = ChatterBotCorpusTrainer(bot)
+#trainer.train('chatterbot.corpus.english')
+
 
 
 if __name__ == "__main__":

@@ -14,6 +14,16 @@
     $db = $client -> escabot;
     $userdata = $db -> userdata;
     $userchat = $db -> userchat;
+    if(isset($_SESSION['fname']) && isset($_SESSION['nick']) && isset($_SESSION['email']) ){
+        $fname = $_SESSION['fname'];
+        $nick = $_SESSION['nick'];
+        $email = $_SESSION['email'];
+
+    }
+    else{
+      //FailCase
+      header("Location:login.php");
+    }
     ?>
   </head>
   <body>

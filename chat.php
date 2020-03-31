@@ -47,17 +47,6 @@
       $db = $client -> escabot;
       $userdata = $db -> userdata;
       $userchat = $db -> userchat;
-      if(isset($_FILES['fileToUpload'])) {
-
-          $myFile = $_FILES['fileToUpload'];
-          $fileTemp = $myFile["tmp_name"];
-          if($fileTemp!=''){
-
-          $bucket = $db->selectGridFSBucket();
-          $file = fopen($fileTemp, 'rb');
-          $bucket->uploadFromStream('neerjd07@gmail.com/'.$myFile["name"], $file);
-        }
-      }
 
       if(isset($_SESSION['fname']) && isset($_SESSION['nick']) && isset($_SESSION['email']) ){
           $fname = $_SESSION['fname'];
@@ -69,6 +58,18 @@
           //FailCase
           echo "<script>parent.location='http://localhost/escabot/login.php;</script>" ;
         }
+        if(isset($_FILES['fileToUpload'])) {
+
+            $myFile = $_FILES['fileToUpload'];
+            $fileTemp = $myFile["tmp_name"];
+            if($fileTemp!=''){
+
+            $bucket = $db->selectGridFSBucket();
+            $file = fopen($fileTemp, 'rb');
+            $bucket->uploadFromStream($email.$myFile["name"], $file);
+          }
+        }
+
       //New Message
       if(isset($_POST['usermsg'])){
         $message = $_POST['usermsg'];

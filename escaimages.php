@@ -26,10 +26,20 @@
       text-align: center;
     }
     </style>
+
+    <script type="text/javascript">
+    function redirect()
+    {
+    var url = "http://localhost/escabot/logout.php";
+    window.location(url);
+    }
+    </script>
 <h1>YOUR IMAGES</h1>
   </head>
   <body>
     <?php
+    session_start();
+    error_reporting(E_ERROR | E_PARSE);
     if(isset($_SESSION['fname']) && isset($_SESSION['nick']) && isset($_SESSION['email']) ){
         $fname = $_SESSION['fname'];
         $nick = $_SESSION['nick'];
@@ -37,6 +47,7 @@
 
       }
       else{
+
         //FailCase
         header("Location:http://localhost/escabot/login.php");
       }
@@ -71,6 +82,7 @@
           mkdir($directory);
         }
 
+        unlink($directory.$name);
         $output = fopen($directory.$name, 'w+');
         $stream = $bucket->openDownloadStream($file);
         $contents = stream_get_contents($stream);
@@ -88,8 +100,9 @@
 
           </div>';
       }
+      $_SESSION['files'] = $listName;
     ?>
-    <a href ="logout.php" >Logout</a>
+    <a class = "button" title="logout o fyour ESCA account" href ="logout.php" >Logout</a>
 
 
   </body>
